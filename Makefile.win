@@ -1,0 +1,13 @@
+CC=         gcc
+SRCS=		luapgsql.c
+LIB=		pgsql
+
+CFLAGS+=	-O3 -Wall -I../pgsql-9.4.1/include -I../lua-5.1.5/src
+LDADD+=	    ../lua-5.1.5/lua51.dll ../pgsql-9.4.1/lib/libpq.dll
+
+${LIB}.dll:	${SRCS:.c=.o}
+		gcc -shared ${SRCS:.c=.o} ${LDADD} -o ${LIB}.dll
+
+clean:
+		rm -f ${SRCS:.c=.o} ${LIB}.dll
+
